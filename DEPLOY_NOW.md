@@ -27,7 +27,7 @@
 ### Step 4: Add Frontend Service
 1. Click **"New Service"** again
 2. Select **"GitHub Repo"** → Choose `synaptiqs/hawkiz-web`
-3. **IMPORTANT**: If you see "Nixpacks was unable to generate a build plan" error
+3. **IMPORTANT**: If you see "Railpack was unable to generate a build plan" error
 4. Click **"Configure root directory"** button (or go to Settings → Service)
 5. Set **Root Directory** to: `frontend` (exactly, lowercase, no slashes)
 6. Configure:

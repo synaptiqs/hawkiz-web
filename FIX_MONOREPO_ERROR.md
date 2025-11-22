@@ -1,8 +1,10 @@
-# Fix: "Nixpacks was unable to generate a build plan" Error
+# Fix: "Railpack was unable to generate a build plan" Error
 
 ## The Problem
 
 Railway can't detect which directory to build because this is a monorepo (multiple services in one repo).
+
+**Note**: Railway now uses Railpack (Nixpacks has been deprecated).
 
 ## The Solution: Set Root Directory
 

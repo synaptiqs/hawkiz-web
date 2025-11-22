@@ -1,5 +1,5 @@
 # Nixpacks configuration for Railway Backend
-# This file helps Railway detect and build the Python backend correctly
+# Minimal configuration - let Railway auto-detect most things
 
 [phases.setup]
 nixPkgs = ["python311"]
@@ -12,4 +12,3 @@ cmds = [
 
 [start]
 cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
-

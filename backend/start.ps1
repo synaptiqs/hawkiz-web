@@ -24,10 +24,11 @@ if ($LASTEXITCODE -ne 0) {
 
 # Start the server
 Write-Host ""
-Write-Host "Starting FastAPI server on http://localhost:8000" -ForegroundColor Green
-Write-Host "API Documentation: http://localhost:8000/docs" -ForegroundColor Cyan
+Write-Host "Starting FastAPI server on http://127.0.0.1:8001" -ForegroundColor Green
+Write-Host "API Documentation: http://127.0.0.1:8001/docs" -ForegroundColor Cyan
+Write-Host "Health Check: http://127.0.0.1:8001/health" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Yellow
 Write-Host ""
 
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn main:app --reload --host 127.0.0.1 --port 8001

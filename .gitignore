@@ -69,3 +69,6 @@ htmlcov/
 *.tmp
 *.temp
 
+# Auto-push logs
+auto_push.log
+

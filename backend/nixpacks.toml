@@ -1,0 +1,15 @@
+# Nixpacks configuration for Railway Backend
+# This file helps Railway detect and build the Python backend correctly
+
+[phases.setup]
+nixPkgs = ["python311"]
+
+[phases.install]
+cmds = [
+  "pip install --upgrade pip",
+  "pip install -r requirements.txt"
+]
+
+[start]
+cmd = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+

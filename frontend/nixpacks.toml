@@ -15,5 +15,5 @@ cmds = [
 ]
 
 [start]
-cmd = "vite preview --host 0.0.0.0 --port ${PORT:-3000}"
+cmd = "vite preview --host 0.0.0.0 --port $PORT"
 

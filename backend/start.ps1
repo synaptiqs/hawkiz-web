@@ -37,14 +37,14 @@ if (-not (Test-Path "main.py")) {
 
 # Run uvicorn
 Write-Host ""
-Write-Host "Backend will be available at: http://localhost:8000" -ForegroundColor Green
-Write-Host "API Docs will be available at: http://localhost:8000/docs" -ForegroundColor Green
+Write-Host "Backend will be available at: http://127.0.0.1:8001" -ForegroundColor Green
+Write-Host "API Docs will be available at: http://127.0.0.1:8001/docs" -ForegroundColor Green
 Write-Host ""
 Write-Host "Press Ctrl+C to stop the server" -ForegroundColor Gray
 Write-Host ""
 
 try {
-    uvicorn main:app --reload --host 127.0.0.1 --port 8000
+    uvicorn main:app --reload --host 127.0.0.1 --port 8001
 } catch {
     Write-Host ""
     Write-Host "ERROR starting server: $_" -ForegroundColor Red

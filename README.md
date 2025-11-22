@@ -40,7 +40,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-The backend will be available at `http://localhost:8000`
+The backend will be available at `http://127.0.0.1:8001`
 
 ### Frontend Setup
 
@@ -84,6 +84,8 @@ npm run dev
 - `GET /health` - Health check
 - `GET /api/test` - Test endpoint
 
+**Note:** Backend runs on port 8001 (port 8000 may be in use by other services)
+
 ## Tech Stack
 
 ### Backend
@@ -102,8 +104,8 @@ npm run dev
 ## Development
 
 ### Backend
-- API documentation: `http://localhost:8000/docs` (Swagger UI)
-- Alternative docs: `http://localhost:8000/redoc`
+- API documentation: `http://127.0.0.1:8001/docs` (Swagger UI)
+- Alternative docs: `http://127.0.0.1:8001/redoc`
 
 ### Frontend
 - Development server with hot reload

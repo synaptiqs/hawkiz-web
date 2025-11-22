@@ -27,11 +27,14 @@
 ### Step 4: Add Frontend Service
 1. Click **"New Service"** again
 2. Select **"GitHub Repo"** → Choose `synaptiqs/hawkiz-web`
-3. Configure:
+3. **IMPORTANT**: If you see "Nixpacks was unable to generate a build plan" error
+4. Click **"Configure root directory"** button (or go to Settings → Service)
+5. Set **Root Directory** to: `frontend` (exactly, lowercase, no slashes)
+6. Configure:
    - **Name**: `frontend`
-   - **Root Directory**: `frontend`
+   - **Root Directory**: `frontend` (must be set!)
    - **Build Command**: `npm install && npm run build`
-   - **Start Command**: `npm run preview -- --host 0.0.0.0 --port $PORT`
+   - **Start Command**: `vite preview --host 0.0.0.0 --port $PORT`
 4. Go to **Variables** tab → Add:
    - `VITE_API_URL` = `https://your-backend-url.railway.app` (use URL from Step 3)
 5. Wait for deployment

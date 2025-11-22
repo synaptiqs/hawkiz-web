@@ -2,8 +2,9 @@
 /**
  * Cross-platform preview script for production
  * Handles PORT environment variable with fallback
+ * Works on Windows, Linux, and macOS
  */
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 const port = process.env.PORT || '3000';
 const host = '0.0.0.0';

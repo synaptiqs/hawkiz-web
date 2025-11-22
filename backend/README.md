@@ -1,63 +1,117 @@
-# Backend Setup
+# Hawkiz Options Backtesting - Backend
 
-## Initial Setup
+FastAPI backend for the options strategy backtesting platform.
 
-1. Create and activate virtual environment:
+## Setup
+
+### 1. Install Dependencies
+
 ```powershell
-python -m venv venv
+# Activate virtual environment
 .\venv\Scripts\Activate.ps1
-```
 
-2. Install dependencies:
-```powershell
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-3. Run the server:
+### 2. Database Setup
+
+1. Install PostgreSQL with TimescaleDB extension
+2. Create database:
+   ```sql
+   CREATE DATABASE hawkiz_db;
+   ```
+3. Enable TimescaleDB extension:
+   ```sql
+   \c hawkiz_db
+   CREATE EXTENSION IF NOT EXISTS timescaledb;
+   ```
+
+### 3. Environment Configuration
+
+Copy `.env.example` to `.env` and update with your database credentials:
+
 ```powershell
-uvicorn main:app --reload
+Copy-Item .env.example .env
 ```
 
-## Updating Requirements
+Edit `.env` with your settings.
 
-To periodically check and update `requirements.txt` with the latest package versions:
+### 4. Run Database Migrations
 
-### Option 1: Using the update script
 ```powershell
-.\venv\Scripts\Activate.ps1
-python update_requirements.py
+# Initialize Alembic (if not already done)
+alembic init alembic
+
+# Create initial migration
+alembic revision --autogenerate -m "Initial schema"
+
+# Apply migrations
+alembic upgrade head
 ```
 
-Or use the PowerShell wrapper:
+### 5. Run the Server
+
 ```powershell
-.\update_requirements.ps1
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### Option 2: Using pip-tools (recommended)
+Or use the start script:
 ```powershell
-pip install pip-tools
-pip-compile --upgrade requirements.txt
+.\start.ps1
 ```
 
-### Option 3: Using pur
-```powershell
-pip install pur
-pur -r requirements.txt
+## API Documentation
+
+Once the server is running, visit:
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## Project Structure
+
+```
+backend/
+├── app/
+│   ├── __init__.py
+│   ├── main.py              # FastAPI app
+│   ├── config.py            # Configuration settings
+│   ├── database.py          # Database connection
+│   ├── models/              # SQLAlchemy models
+│   │   ├── stock_prices.py
+│   │   ├── options_chains.py
+│   │   └── market_events.py
+│   ├── schemas/             # Pydantic schemas
+│   │   └── market_data.py
+│   ├── services/            # Business logic
+│   │   └── market_data_service.py
+│   └── api/                 # API routes
+│       └── v1/
+│           └── market_data.py
+├── alembic/                 # Database migrations
+├── requirements.txt
+└── .env                     # Environment variables
 ```
 
-### Option 4: Manual update
+## API Endpoints
+
+### Market Data
+
+- `GET /api/v1/market-data/stocks/{symbol}` - Get stock prices
+- `POST /api/v1/market-data/stocks/{symbol}/fetch` - Fetch and store stock data
+- `GET /api/v1/market-data/options/{underlying_symbol}` - Get options chain
+- `GET /api/v1/market-data/available-dates` - Get available dates
+
+## Development
+
+### Running Tests
+
 ```powershell
-pip list --outdated  # Check outdated packages
-pip install --upgrade <package_name>  # Update specific package
-pip freeze > requirements.txt  # Update requirements file
+pytest
 ```
 
-## Automated Updates
+### Creating Migrations
 
-You can set up a scheduled task in Windows to run the update script periodically:
-
-1. Open Task Scheduler
-2. Create a new task
-3. Set trigger (e.g., weekly)
-4. Set action to run: `powershell.exe -File "C:\hawkiz-web\backend\update_requirements.ps1"`
-
+```powershell
+alembic revision --autogenerate -m "Description of changes"
+alembic upgrade head
+```

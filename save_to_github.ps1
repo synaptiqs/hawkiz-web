@@ -33,7 +33,9 @@ $remote = git remote get-url origin -q 2>$null
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""
     Write-Host "Pushing to GitHub..." -ForegroundColor Cyan
-    git push origin master
+    # Get current branch name
+    $currentBranch = git branch --show-current
+    git push origin $currentBranch
     if ($LASTEXITCODE -eq 0) {
         Write-Host ""
         Write-Host "Successfully saved to GitHub!" -ForegroundColor Green
@@ -48,7 +50,9 @@ if ($LASTEXITCODE -eq 0) {
     Write-Host "No GitHub remote configured." -ForegroundColor Yellow
     Write-Host "To set up GitHub remote, run:" -ForegroundColor Yellow
     Write-Host "  git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git" -ForegroundColor Gray
-    Write-Host "  git push -u origin master" -ForegroundColor Gray
+    # Get current branch name
+    $currentBranch = git branch --show-current
+    Write-Host "  git push -u origin $currentBranch" -ForegroundColor Gray
 }
 
 Write-Host ""

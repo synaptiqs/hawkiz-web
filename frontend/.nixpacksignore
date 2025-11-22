@@ -1,9 +1,0 @@
-# Frontend files to ignore during Nixpacks build
-node_modules/
-dist/
-.env
-.env.local
-.git/
-*.log
-.DS_Store
-

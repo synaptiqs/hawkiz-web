@@ -1,7 +1,7 @@
 # Railway frontend service configuration
 
 [build]
-builder = "NIXPACKS"
+builder = "RAILPACK"
 buildCommand = "npm install && npm run build"
 
 [deploy]
